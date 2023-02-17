@@ -28,22 +28,39 @@ const Letter = styled.button`
   }
 `;
 
-const alphabetCodes = Array.from(Array(26)).map((_, i) => i + 65);
-const alphabet = alphabetCodes.map((x) => String.fromCharCode(x));
+const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
 export default function Letras({
   gameActive,
+  unaccentedWordArray,
   guessedLetters,
-  setGuesseedLetters,
+  setGuessedLetters,
   failCount,
   setFailCount,
 }) {
+  function isDisabled(letter) {
+    return (
+      unaccentedWordArray.every((char) => guessedLetters.includes(char)) ||
+      guessedLetters.includes(letter) ||
+      !gameActive ||
+      failCount === 6
+    );
+  }
+
+  function guessLetter(letter) {
+    setGuessedLetters([...guessedLetters, letter]);
+    if (!unaccentedWordArray.includes(letter)) {
+      setFailCount(failCount + 1);
+    }
+  }
+
   return (
     <Letters>
       {alphabet.map((letter) => (
         <Letter
           key={letter}
-          disabled={guessedLetters.includes(letter) || !gameActive}
+          disabled={isDisabled(letter)}
+          onClick={() => guessLetter(letter)}
         >
           {letter}
         </Letter>

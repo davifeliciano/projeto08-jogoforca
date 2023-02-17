@@ -40,8 +40,35 @@ const Button = styled.button`
   }
 `;
 
-export default function Chute() {
+export default function Chute({
+  setGameActive,
+  wordArray,
+  unaccentedWordArray,
+  guessedLetters,
+  setGuessedLetters,
+  setWordGuessed,
+  failCount,
+  setFailCount,
+}) {
   const [input, setInput] = useState("");
+
+  function isDisabled() {
+    return (
+      unaccentedWordArray.every((char) => guessedLetters.includes(char)) ||
+      input === "" ||
+      failCount === 6
+    );
+  }
+
+  function guessWord() {
+    if (input !== wordArray.join("")) {
+      setFailCount(6);
+    }
+
+    setWordGuessed(input);
+    setGameActive(false);
+    setGuessedLetters(unaccentedWordArray);
+  }
 
   return (
     <InputContainer>
@@ -50,7 +77,9 @@ export default function Chute() {
         placeholder="Já sabe a palavra? Dê um chute!"
         onChange={(e) => setInput(e.target.value.trim())}
       />
-      <Button disabled={input === ""}>Chutar</Button>
+      <Button disabled={isDisabled()} onClick={guessWord}>
+        Chutar
+      </Button>
     </InputContainer>
   );
 }
