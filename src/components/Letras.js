@@ -17,14 +17,24 @@ const Letter = styled.button`
   font-size: 1.6rem;
   font-weight: 700;
   user-select: none;
-  color: ${(props) => (props.disabled ? "#798a9f" : "#7aa7c7")};
-  background-color: ${(props) => (props.disabled ? "#9faab5" : "#e1ecf4")};
+  color: #7aa7c7;
+  background-color: #e1ecf4;
   transition: all 100ms ease;
 
   &:hover {
-    cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-    transform: ${(props) => (props.disabled ? "unset" : "scale(105%)")};
+    cursor: pointer;
+    transform: scale(105%);
     transition: all 100ms ease;
+  }
+
+  &:disabled {
+    color: #798a9f;
+    background-color: #9faab5;
+  }
+
+  &:hover:disabled {
+    cursor: not-allowed;
+    transform: none;
   }
 `;
 

@@ -48,6 +48,7 @@ export default function App() {
         setFailCount={setFailCount}
       />
       <Chute
+        gameActive={gameActive}
         setGameActive={setGameActive}
         wordArray={wordArray}
         unaccentedWordArray={unaccentedWordArray}

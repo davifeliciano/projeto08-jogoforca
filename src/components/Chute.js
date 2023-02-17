@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 const InputContainer = styled.div`
@@ -18,6 +17,10 @@ const Input = styled.input`
   &:focus {
     outline: transparent;
   }
+
+  &:disabled:hover {
+    cursor: not-allowed;
+  }
 `;
 
 const Button = styled.button`
@@ -29,18 +32,29 @@ const Button = styled.button`
   font-size: 1.6rem;
   font-weight: 700;
   user-select: none;
-  color: ${(props) => (props.disabled ? "#798a9f" : "#7aa7c7")};
-  background-color: ${(props) => (props.disabled ? "#9faab5" : "#e1ecf4")};
+  color: #7aa7c7;
+  background-color: #e1ecf4;
   transition: all 100ms ease;
 
   &:hover {
-    cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-    transform: ${(props) => (props.disabled ? "unset" : "scale(105%)")};
+    cursor: pointer;
+    transform: scale(105%);
     transition: all 100ms ease;
+  }
+
+  &:disabled {
+    color: #798a9f;
+    background-color: #9faab5;
+  }
+
+  &:hover:disabled {
+    cursor: not-allowed;
+    transform: none;
   }
 `;
 
 export default function Chute({
+  gameActive,
   setGameActive,
   wordArray,
   unaccentedWordArray,
@@ -52,12 +66,16 @@ export default function Chute({
   failCount,
   setFailCount,
 }) {
-  function isDisabled() {
-    return (
-      unaccentedWordArray.every((char) => guessedLetters.includes(char)) ||
-      inputValue === "" ||
-      failCount === 6
-    );
+  function isWordRevealed() {
+    return unaccentedWordArray.every((char) => guessedLetters.includes(char));
+  }
+
+  function isInputDisabled() {
+    return isWordRevealed() || !gameActive || failCount === 6;
+  }
+
+  function isButtonDisabled() {
+    return isWordRevealed() || inputValue === "" || failCount === 6;
   }
 
   function guessWord() {
@@ -76,11 +94,13 @@ export default function Chute({
         type="text"
         placeholder="Já sabe a palavra? Dê um chute!"
         value={inputValue}
+        disabled={isInputDisabled()}
         onChange={(e) => setInputValue(e.target.value.trim())}
+        onKeyUp={(e) => e.key === "Enter" && guessWord()}
         data-test="guess-input"
       />
       <Button
-        disabled={isDisabled()}
+        disabled={isButtonDisabled()}
         onClick={guessWord}
         data-test="guess-button"
       >
