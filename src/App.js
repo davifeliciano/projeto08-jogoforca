@@ -19,6 +19,7 @@ export default function App() {
   const [wordArray, setWordArray] = useState([]);
   const [unaccentedWordArray, setUnaccentedWordArray] = useState([]);
   const [guessedLetters, setGuessedLetters] = useState([]);
+  const [inputValue, setInputValue] = useState("");
   const [wordGuessed, setWordGuessed] = useState(null);
   const [failCount, setFailCount] = useState(0);
 
@@ -32,6 +33,7 @@ export default function App() {
         setUnaccentedWordArray={setUnaccentedWordArray}
         guessedLetters={guessedLetters}
         setGuessedLetters={setGuessedLetters}
+        setInputValue={setInputValue}
         wordGuessed={wordGuessed}
         setWordGuessed={setWordGuessed}
         failCount={failCount}
@@ -51,6 +53,8 @@ export default function App() {
         unaccentedWordArray={unaccentedWordArray}
         guessedLetters={guessedLetters}
         setGuessedLetters={setGuessedLetters}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
         setWordGuessed={setWordGuessed}
         failCount={failCount}
         setFailCount={setFailCount}

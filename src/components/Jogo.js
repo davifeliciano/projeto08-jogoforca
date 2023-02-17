@@ -68,6 +68,7 @@ export default function Jogo({
   setUnaccentedWordArray,
   guessedLetters,
   setGuessedLetters,
+  setInputValue,
   wordGuessed,
   setWordGuessed,
   failCount,
@@ -95,6 +96,7 @@ export default function Jogo({
     setWordArray(wordArray);
     setUnaccentedWordArray(getUnaccentedWordArray(wordArray));
     setGuessedLetters([]);
+    setInputValue("");
     setWordGuessed(null);
     setFailCount(0);
   }
