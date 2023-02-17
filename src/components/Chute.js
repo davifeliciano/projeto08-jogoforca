@@ -77,8 +77,13 @@ export default function Chute({
         placeholder="Já sabe a palavra? Dê um chute!"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value.trim())}
+        data-test="guess-input"
       />
-      <Button disabled={isDisabled()} onClick={guessWord}>
+      <Button
+        disabled={isDisabled()}
+        onClick={guessWord}
+        data-test="guess-button"
+      >
         Chutar
       </Button>
     </InputContainer>

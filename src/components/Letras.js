@@ -61,6 +61,7 @@ export default function Letras({
           key={letter}
           disabled={isDisabled(letter)}
           onClick={() => guessLetter(letter)}
+          data-test="letter"
         >
           {letter}
         </Letter>

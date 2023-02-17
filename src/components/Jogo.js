@@ -127,15 +127,18 @@ export default function Jogo({
 
   return (
     <StyledJogo>
-      <Image src={src} alt={alt} />
+      <Image src={src} alt={alt} data-test="game-image" />
       <WordSection>
-        <Button onClick={resetGame}>Escolher Palavra</Button>
+        <Button onClick={resetGame} data-test="choose-word">
+          Escolher Palavra
+        </Button>
         <Word
           wordArray={wordArray}
           guessedLetters={guessedLetters}
           wordGuessed={wordGuessed}
           failCount={failCount}
           displayedWord={displayedWord}
+          data-test="word"
         >
           {displayedWord}
         </Word>
