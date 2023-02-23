@@ -79,7 +79,7 @@ export default function Chute({
   }
 
   function guessWord() {
-    if (inputValue !== wordArray.join("")) {
+    if (inputValue.toLowerCase() !== wordArray.join("")) {
       setFailCount(6);
     }
 
